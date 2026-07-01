@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COMPANY_OS — борд проектов VOMNIA</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <b>COMPANY_OS</b> <span class="muted">борд проектов VOMNIA</span>
+    <span id="who" class="who"></span>
+    <button id="logout" class="hidden" type="button">Выйти</button>
+  </header>
+
+  <!-- Экран входа (Supabase Auth по email) -->
+  <section id="login" class="card hidden">
+    <h2>Вход</h2>
+    <input id="email" type="email" placeholder="email" autocomplete="username" />
+    <input id="password" type="password" placeholder="пароль" autocomplete="current-password" />
+    <button id="signin" type="button">Войти</button>
+    <p id="loginErr" class="err"></p>
+  </section>
+
+  <!-- Экран «Проекты» -->
+  <section id="projects" class="hidden">
+    <h2>Проекты</h2>
+    <div id="projectCards" class="cards"></div>
+  </section>
+
+  <!-- Экран проекта -->
+  <section id="project" class="hidden">
+    <button id="back" type="button">← к проектам</button>
+    <h2 id="pName"></h2>
+    <p class="muted"><span id="pClient"></span> · <span id="pPhase"></span></p>
+    <div class="row2">
+      <div class="card"><h3>Сейчас</h3><p id="pFocus"></p></div>
+      <div class="card"><h3>Дальше</h3><p id="pNext"></p></div>
+    </div>
+    <div id="blockers" class="card blockers"></div>
+    <h3>Доска задач</h3>
+    <div id="kanban" class="kanban"></div>
+    <h3>Лента изменений</h3>
+    <ul id="feed" class="feed"></ul>
+  </section>
+
+  <script src="/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

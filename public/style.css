@@ -1,0 +1,37 @@
+* { box-sizing: border-box; }
+body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; background: #f6f7f9; color: #1c2330; }
+header { display: flex; align-items: center; gap: 8px; padding: 12px 18px; background: #fff; border-bottom: 1px solid #e5e8ec; position: sticky; top: 0; }
+header .who { margin-left: auto; color: #5b6472; font-size: 13px; }
+header button { padding: 4px 10px; }
+h2 { margin: 18px 18px 8px; }
+h3 { margin: 14px 0 6px; font-size: 15px; }
+section { padding: 0 18px 24px; }
+.muted { color: #7a8494; }
+.small { font-size: 12px; }
+.err { color: #c0392b; }
+.hidden { display: none !important; }
+button { cursor: pointer; border: 1px solid #cfd6de; background: #fff; border-radius: 8px; padding: 6px 12px; }
+button:hover { background: #eef1f5; }
+input, select { padding: 7px 10px; border: 1px solid #cfd6de; border-radius: 8px; font-size: 14px; }
+.card { background: #fff; border: 1px solid #e5e8ec; border-radius: 12px; padding: 14px; margin: 10px 0; }
+#login { max-width: 320px; margin: 40px auto; display: flex; flex-direction: column; gap: 10px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.proj { cursor: pointer; transition: box-shadow .12s; }
+.proj:hover { box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+.ptitle { font-weight: 600; font-size: 16px; }
+.focus { margin-top: 8px; font-size: 14px; }
+.badges { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+.badge { font-size: 12px; background: #eef1f5; border-radius: 20px; padding: 2px 9px; color: #4a5364; }
+.badge.b-red { background: #fdecea; color: #c0392b; }
+.badge.b-hot { background: #fff4e5; color: #b9770e; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.blockers ul { margin: 6px 0 0; padding-left: 18px; }
+.kanban { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.col { background: #eef1f5; border-radius: 10px; padding: 8px; min-height: 60px; }
+.colh { font-size: 12px; font-weight: 600; color: #5b6472; text-transform: uppercase; margin-bottom: 6px; }
+.task { background: #fff; border: 1px solid #e5e8ec; border-radius: 8px; padding: 8px; margin-bottom: 8px; font-size: 13px; }
+.task.mine { border-color: #7aa7ff; box-shadow: 0 0 0 1px #7aa7ff33; }
+.task select { margin-top: 6px; width: 100%; font-size: 12px; }
+.feed { list-style: none; padding: 0; }
+.feed li { padding: 5px 0; border-bottom: 1px solid #eceff3; font-size: 13px; }
+@media (max-width: 720px) { .kanban { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }
