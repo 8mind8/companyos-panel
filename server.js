@@ -1,16 +1,20 @@
-// COMPANY_OS panel — крохотный статический сервер (без зависимостей).
+// COMPANY_OS panel — крохотный статический сервер (без npm-зависимостей).
 // Слушает process.env.PORT (правило со-сервера 178). Отдаёт SPA из ./public
-// и генерит /config.js из env (SUPABASE_URL + SUPABASE_ANON_KEY) — значения
-// приходят в env заявки деплоя, НЕ хранятся в git. anon-ключ безопасен с RLS.
+// и генерит /config.js из env (SUPABASE_URL + SUPABASE_ANON_KEY) — значения приходят в env заявки
+// деплоя, НЕ в git. anon-ключ безопасен с RLS.
+// HTTPS: если есть self-signed сертификат (./certs, генерится в Dockerfile) — поднимаемся по TLS
+// (self-serve HTTPS для внутреннего инструмента, без общего Caddy). Иначе — обычный HTTP.
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 8130;
 const PUBLIC = path.join(__dirname, 'public');
+const CERT_DIR = path.join(__dirname, 'certs');
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml' };
 
-const server = http.createServer((req, res) => {
+const handler = (req, res) => {
   const url = req.url.split('?')[0];
 
   // Конфиг для браузера — из env, не из git.
@@ -34,6 +38,13 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream' });
     res.end(data);
   });
-});
+};
 
-server.listen(PORT, () => console.log('COMPANY_OS panel on ' + PORT));
+// Self-signed TLS, если сертификат собран в образе.
+let tls = null;
+try {
+  tls = { key: fs.readFileSync(path.join(CERT_DIR, 'key.pem')), cert: fs.readFileSync(path.join(CERT_DIR, 'cert.pem')) };
+} catch (e) { tls = null; }
+
+const server = tls ? https.createServer(tls, handler) : http.createServer(handler);
+server.listen(PORT, () => console.log((tls ? 'HTTPS' : 'HTTP') + ' COMPANY_OS panel on ' + PORT));
