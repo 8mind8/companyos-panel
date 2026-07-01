@@ -1,47 +1,60 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>COMPANY_OS — борд проектов VOMNIA</title>
+  <title>COMPANY_OS — борд проєктів VOMNIA</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <header>
-    <b>COMPANY_OS</b> <span class="muted">борд проектов VOMNIA</span>
+    <b>COMPANY_OS</b> <span class="sub">борд проєктів · v1</span>
     <span id="who" class="who"></span>
-    <button id="logout" class="hidden" type="button">Выйти</button>
+    <button id="logout" class="hidden" type="button">Вийти</button>
   </header>
 
-  <!-- Экран входа (Supabase Auth по email) -->
-  <section id="login" class="card hidden">
-    <h2>Вход</h2>
+  <!-- Вход (Supabase Auth по email) -->
+  <section id="login" class="hidden">
+    <h2>Вхід</h2>
     <input id="email" type="email" placeholder="email" autocomplete="username" />
     <input id="password" type="password" placeholder="пароль" autocomplete="current-password" />
-    <button id="signin" type="button">Войти</button>
+    <button id="signin" type="button">Увійти</button>
     <p id="loginErr" class="err"></p>
   </section>
 
-  <!-- Экран «Проекты» -->
-  <section id="projects" class="hidden">
-    <h2>Проекты</h2>
+  <!-- Экран «Проєкти» -->
+  <section id="projects" class="hidden wrap">
+    <h2>Проєкти</h2>
     <div id="projectCards" class="cards"></div>
   </section>
 
-  <!-- Экран проекта -->
-  <section id="project" class="hidden">
-    <button id="back" type="button">← к проектам</button>
-    <h2 id="pName"></h2>
-    <p class="muted"><span id="pClient"></span> · <span id="pPhase"></span></p>
-    <div class="row2">
-      <div class="card"><h3>Сейчас</h3><p id="pFocus"></p></div>
-      <div class="card"><h3>Дальше</h3><p id="pNext"></p></div>
+  <!-- Экран проекта (дашборд: Guided + донат + колонки) -->
+  <section id="project" class="hidden wrap">
+    <button id="back" type="button">← до проєктів</button>
+    <div class="ptop"><span class="pn" id="pName"></span><span class="pm" id="pMeta"></span></div>
+    <div class="hint">ⓘ <b>Як читати:</b> зверху — % готовності та лічильники. Червоне «Потребує уваги» — те, що блокує (робити першим). Нижче — дошка задач за статусами.</div>
+
+    <div class="grid-kpi">
+      <div class="widget prog">
+        <div class="lbl">Готовність проєкту</div>
+        <div class="pct" id="pctVal">—</div>
+        <div class="track"><i id="pctBar"></i></div>
+        <div class="sub" id="pctSub"></div>
+      </div>
+      <div class="widget kpi" style="--bar:var(--st-todo)"><div class="lbl">● Відкрито</div><div class="num" id="kTodo">0</div></div>
+      <div class="widget kpi" style="--bar:var(--st-progress)"><div class="lbl">◐ В роботі</div><div class="num" id="kProg">0</div></div>
+      <div class="widget kpi" style="--bar:var(--st-block)"><div class="lbl">🔴 Блок</div><div class="num" id="kBlock" style="color:var(--st-block)">0</div></div>
+      <div class="widget kpi" style="--bar:var(--accent)"><div class="lbl">🔥 Срочно</div><div class="num" id="kHot" style="color:var(--accent)">0</div></div>
     </div>
-    <div id="blockers" class="card blockers"></div>
-    <h3>Доска задач</h3>
-    <div id="kanban" class="kanban"></div>
-    <h3>Лента изменений</h3>
-    <ul id="feed" class="feed"></ul>
+
+    <div class="attn" id="attn"></div>
+
+    <div class="grid-2">
+      <div class="widget"><h3 class="sec">Розподіл статусів</h3><div id="donut"></div></div>
+      <div class="widget"><h3 class="sec">Навантаження по власниках</h3><div id="owners"></div></div>
+    </div>
+
+    <div class="widget"><h3 class="sec">Дошка задач</h3><div id="kanban"></div></div>
   </section>
 
   <script src="/config.js"></script>
