@@ -87,4 +87,26 @@ h2{margin:18px 0 10px;font-size:20px;} h3.sec{font-size:14px;font-weight:600;col
 .task .meta{margin-top:5px;font-size:12px;color:var(--text-low);display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
 .task .meta .own{background:var(--surface-2);border-radius:var(--r-pill);padding:1px 8px;font-size:11px;color:var(--text-mid);}
 .task .blk{color:var(--st-block);}
+/* шапка виджета + сегмент-фильтр */
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.seg{display:inline-flex;gap:2px;background:var(--surface-2);border-radius:var(--r-pill);padding:3px;}
+.seg button{border:0;background:transparent;color:var(--text-mid);font-size:13px;padding:6px 14px;border-radius:6px;min-height:34px;}
+.seg button.on{background:var(--surface);color:var(--text-hi);box-shadow:0 1px 4px rgba(0,0,0,.4);}
+/* роль-чипы на карточке */
+.rchips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.rchip{font-size:11px;background:rgba(201,162,75,.14);color:var(--accent);border-radius:var(--r-pill);padding:1px 7px;}
+.task.expandable{cursor:pointer;}
+.task .caret{color:var(--text-low);font-size:12px;transition:transform .12s;display:inline-block;}
+.task.open .caret{transform:rotate(90deg);}
+/* разворот ТЗ */
+.tzdetail{margin-top:10px;border-top:1px solid var(--border);padding-top:10px;}
+.tzrole{margin-bottom:10px;}
+.tzhead{font-size:13px;color:var(--text-hi);margin-bottom:4px;}
+.tzhead b{color:var(--accent);}
+.tztext{font-size:13px;color:var(--text-mid);white-space:pre-wrap;background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;padding:8px 10px;max-height:220px;overflow:auto;}
+.tzbtns{display:flex;gap:10px;align-items:center;margin-top:6px;}
+.copybtn{min-height:34px;font-size:12px;background:var(--surface-2);}
+.canon{color:var(--st-progress);font-size:12px;text-decoration:none;}
+.canon:hover{text-decoration:underline;}
 @media(max-width:820px){.grid-kpi{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}.ptop .pn{font-size:19px;}}
